@@ -1,0 +1,16 @@
+td.text_prvkey id="prvkey_wif_#{counter}"
+	- if @expose=='prvkey_qr_btn_'+counter.to_s	
+		div.unhide id="show_prvkey_#{counter}"
+			= render 'shared/hide_key', row: counter, key: row[:private_wif]
+		div.hidden id="hide_prvkey_#{counter}"
+			= render 'shared/show_key', row: counter
+	- else
+		div.hidden id="show_prvkey_#{counter}"
+			= render 'shared/hide_key', row: counter, key: row[:private_wif]
+		div.unhide id="hide_prvkey_#{counter}"
+			= render 'shared/show_key', row: counter
+td.qr_prvkey id="qr_prvkey_wif_#{counter}"
+	- if @expose=='prvkey_qr_btn_'+counter.to_s			
+		= render 'shared/show_qr', qr: generate_qr(row[:private_wif]), id: 'privkey:' + row[:private_wif]
+	- else
+		= render 'shared/prvkey_qr_button', id: "prvkey_qr_btn_#{counter}", row: counter

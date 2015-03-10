@@ -1,0 +1,11 @@
+/ = render 'layouts/flash', flash: [[:success, ['foobar','mytitle']],[:alert, 'foogaz']]
+- flash = []
+- message_array=[]
+- @n.times do |n|
+ - message_array << "#{(n+1).to_i.ordinalize} password share"	
+- message_array.concat(["Bitcoin addresses","NON-ENCRYPTED private keys","Encrypted private keys","Password"])
+- message_array.each do |prefix|
+	- flash << [:success,{message: prefix+success_copy_suffix,title: success_copy_title(cold_storage_directory_name),hide: true,close: false}]
+- flash << [:error, {message: no_usb_message, title: 'insert a USB drive',hide: true,id: 'no_usb_message',close: false}]
+- flash << [:info, {message: "#{'Insert a USB stick and' unless usb?} Download your cold storage files #{'to the USB stick' if usb?}", hide: false,id: 'instruction',close: false}]
+= render 'layouts/flash', flash: flash

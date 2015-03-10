@@ -1,0 +1,4 @@
+table.public_output id="public_output"
+	= render 'shared/public_headers' 
+	- @keys.each do |row|
+		= render 'shared/public_row', row: row, counter: @keys.index(row)+1

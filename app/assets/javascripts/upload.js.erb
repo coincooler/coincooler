@@ -1,0 +1,75 @@
+<% environment.context_class.instance_eval { include ViewsHelper } %>
+function setAutoUpload() {
+  $('#fileupload').fileupload('option', { 
+  	autoUpload:true,
+  	// maxNumberOfFiles: 2,
+		// acceptFileTypes:  /(csv)|(txt)$/i
+  });  
+};
+function setMaxNumFiles(num) {
+  $('#fileupload').fileupload('option', { 
+  	maxNumberOfFiles: num,
+  });  
+};
+function toggleShareUpload() {
+	if ($('#upload_shares').is(":checked")) {
+		setMaxNumFiles(10);
+		$('#upload_password').prop('checked', false);
+		$('span#upbut').css('opacity',1);
+		$('#password input#keyboard').prop('disabled', true);
+		$('#upbutext').text("<%= upload_button_shares %>");
+		$('input#keyboard').css('opacity',0.5);		
+	} else {
+		setMaxNumFiles(0);
+		$('#password input#keyboard').prop('disabled', false);
+		$('span#upbut').css('opacity',0.01);
+		$('#upbutext').text("<%= upload_button %>");
+		$('input#keyboard').css('opacity',1);
+	};	
+}
+function togglePassUpload() {
+	if ($('#upload_password').is(":checked")) {
+		setMaxNumFiles(1);
+		$('#upload_shares').prop('checked', false);
+		$('#password input#keyboard').prop('disabled', true);
+		$('span#upbut').css('opacity',1);
+		$('#upbutext').text("<%= upload_button_password %>");
+		$('input#keyboard').css('opacity',0.5);		
+	} else {
+		setMaxNumFiles(0);
+		$('#password input#keyboard').prop('disabled', false);
+		$('span#upbut').css('opacity',0.01);
+		$('#upbutext').text("<%= upload_button %>");
+		$('input#keyboard').css('opacity',1);
+	};	
+}
+function togglePostPassUpload() {
+	if ($('#upload_shares').is(":checked")!=true && $('#uplist td.name').length > 1) {
+		$('span#upbut').css('opacity',0.01);
+	}
+}
+function togglePassUploadCkbx() {
+	if ($('#uplist td.name').length > 1) {
+		$('#upload_password').prop('disabled', true);
+	} else {
+		$('#upload_password').prop('disabled', false);
+	}
+}
+function resumeOnDeleteAll() {
+	if ($('#uplist td.name').length == 0) {
+		$('#upload_password').prop('disabled', false);
+		$('#upload_shares').prop('disabled', false);
+		$('#upbutext').text("<%= upload_button %>");
+		$('#password').hide();
+		setMaxNumFiles(1);
+	}	
+}
+function observersDuties() {
+	toggleSubmitButton();
+	togglePasswordAndShares();
+	togglePostPassUpload();
+	togglePassUploadCkbx();
+	resumeOnDeleteAll();
+	toggleDeleteAll();
+	alignDeleteAll();	
+}

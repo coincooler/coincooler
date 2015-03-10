@@ -1,0 +1,5 @@
+= link_to "#{key}", remove_params(request.fullpath), title: "Hide Private Key"
+
+/ = link_to "#{key}",'#',onclick: "$('#show_prvkey_#{row}').toggle();$('#hide_prvkey_#{row}').toggle();$('#show_prvkey_qr_btn_#{row}').toggle();$('#hide_prvkey_qr_btn_#{row}').toggle()", title: "Hide Private Key", class: "nolink"
+
+/ = link_to_function "#{key}", "$('#hide_prvkey_#{row}').toggle();$('#show_prvkey_#{row}').toggle()", title: "Hide Private Key", class: "nolink"

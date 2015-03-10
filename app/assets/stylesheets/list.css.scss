@@ -1,0 +1,78 @@
+@import "variables.css.scss";
+
+.list{
+  font-size:1.5em;
+  line-height:1.2em;
+  ul li{    
+    line-height:1em;
+  }
+  a {
+    cursor:pointer;
+    &:hover{
+      // color:blue;
+      text-decoration:none;
+    }      
+  }
+  h2 a, h3 a {
+    color:$defaultlistcolor;
+    &:hover{
+      // color:#006633;
+      text-decoration:none;
+    }
+  }
+  ul li h2 a, ul li h3 a {
+    color:$defaultlistcolor;
+    &:hover{
+      color:#006633;
+      text-decoration:none;
+    }
+  }  
+  ul li a{
+    &:hover{
+      // color:blue;
+      text-decoration:none;
+    }    
+  }
+  hr {
+    margin-bottom: 35px;
+    margin-top:10px;
+    border: 0;
+    border-top: 1px solid #eeeeee;
+    border-bottom: 2px solid $grayDark;
+  }
+  &.faq{
+  h2 a, h3 a {
+      color:$secondlistcolor;
+    }
+    ul li h2 a, ul li h3 a {
+      color:$secondlistcolor;
+    }
+    ul.file_types{
+      list-style: none;
+      li h3 a {
+        color:$secondlistcolor;
+        font-size:0.8em;
+        &:hover{
+          // color:#006633;
+          text-decoration:none;
+        }    
+      }
+    }        
+  }
+  &.help{
+  h2 a, h3 a {
+      color:$secondlistcolor;
+    }
+    ul li h2 a, ul li h3 a {
+      color:$secondlistcolor;
+    }    
+  }
+  &.about{
+  h2 a, h3 a {
+      color:$secondlistcolor;
+    }
+    ul li h2 a, ul li h3 a {
+      color:$secondlistcolor;
+    }    
+  }  
+}

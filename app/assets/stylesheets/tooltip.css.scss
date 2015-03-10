@@ -1,0 +1,13 @@
+.tooltip{
+  font-size:18;  
+  z-index:10000;
+}
+.tooltip {
+    white-space:pre-wrap;
+}
+.tooltip.left   { 
+  margin-left: -10; 
+}
+.dropdown-menu .tooltip.left{
+  margin-left: -10;
+}

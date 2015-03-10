@@ -1,0 +1,6 @@
+tr 
+	td.counter
+		= "#{counter}"
+	= render 'shared/private_key', row: row, counter: counter
+	= render 'shared/address' ,row: row, counter: counter
+	= render 'shared/download_row', id: "download_row_#{counter}", row: counter

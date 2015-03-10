@@ -1,0 +1,8 @@
+th.title_prvkey colspan="2"
+	.title_text
+		= keys_header
+		.normal title="Wallet Import Format"
+			| (WIF)
+	- if params[:controller]=='freezers'
+		.download_keys_button    
+		  = render 'download_keys_button'

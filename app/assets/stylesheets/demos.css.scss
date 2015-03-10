@@ -1,0 +1,137 @@
+// Place all the styles related to the Demos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables.css.scss";
+
+.homepage{width:870px;color:#fff; font:15px/18px Arial, Helvetica, sans-serif;padding-top:0 !important; display:table; margin:auto;}
+.homepage .content{max-width:870px;margin:auto;padding:0px; display:table-cell; vertical-align:middle; opacity:0;}
+	
+	/*columns*/
+.column_homepage{width:48%;margin-right:4%; float:left;margin-top:10em;}
+.column_homepage.center{float:none;width:100%;}
+.column_homepage.right{margin-right:0;}
+.column_about{width:48%;margin-right:4%; float:left;}
+.column_icon{width:30%;margin-right:5%; float:left;}
+.column_description{width:65%;margin-top:12%;float:left}
+
+.clearfix:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+.column_one_half{width:48%;}
+.column_one_third{width:30.6666%;}
+.column_one_fourth{width:22%;}
+.column_two_thirds{width:65.3334%;}
+.column_three_fourths{width:74%;}
+.last{margin-right:0; clear:right;}
+
+* {
+  box-sizing: border-box;
+}
+
+.background-image {
+  background-image:  url(image_path('network.jpg'));
+  background-size: cover;
+  display: block;
+  // filter: blur(5px);
+  // -webkit-filter: blur(5px);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  right: 0;
+  z-index: 1;
+}
+
+.content {
+	.blury{
+    padding:1em;
+  	background: rgba(255, 255, 255, 0.35);
+  	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  	border-radius: 15px;
+	}    
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  top: 10px;
+  left: 0;
+  position: fixed;
+  margin-left: 20px;
+  margin-right: 20px;
+  right: 0;
+  z-index: 2;
+  padding: 0 10px;
+}
+.landing{
+  // background-color: #7c7f82;
+  h1{
+    color:#112368;    
+  }
+  h2 {
+    font-size: 1.7em;
+    letter-spacing: -1px;
+    text-align: left;
+    font-weight: normal;
+    color: 000;
+    padding-left:1em;
+    ul li{
+      line-height:1.2em;  
+    }    
+  }
+  h2.subtitle {
+    font-size: 2em;
+    letter-spacing: -1px;
+    text-align: center;
+    font-weight: normal;
+    color: white;
+    padding-left:0;
+  }
+  h3 {
+    font-size: 1.4em;
+    letter-spacing: -1px;
+    text-align: left;
+    font-weight: normal;
+    color: 000;
+    // padding:1em;
+    line-height: 1.2em;
+  }
+}
+.check{
+  padding-right: 10px;
+}
+ul.nolist{
+  list-style:none;
+}
+.demobutton{
+  // padding-left:5em;
+  button{
+    margin-right:2em;
+    margin-left:4em;
+    width:100px;  
+  }
+  a{
+    width: 150px;
+    margin-bottom:20px;
+    margin-right:5em;
+  }
+  
+}
+.opaque{
+    // background: url(image_path('Bitcoin_in_ice_transparent_bgd.png')) no-repeat center center fixed;
+    background: url(image_path('network.jpg')) no-repeat center center fixed;
+    background-size:100%;
+    opacity:1;
+    height: 100%;
+    width: 100%;
+}
+
+/*Filter styles*/
+.saturate {-webkit-filter: saturate(3);}
+.grayscale {-webkit-filter: grayscale(10%);}
+.contrast {-webkit-filter: contrast(160%);}
+.brightness {-webkit-filter: brightness(0.25);}
+.blur {-webkit-filter: blur(3px);}
+.invert {-webkit-filter: invert(100%);}
+.sepia {-webkit-filter: sepia(100%);}
+.huerotate {-webkit-filter: hue-rotate(180deg);}
+.rss.opacity {-webkit-filter: opacity(50%);}
+
+.shiny{
+    opacity: 1;
+    position:absolute;
+    width:100%;
+}

@@ -1,0 +1,6 @@
+th.title_pubkey colspan="2"
+	.title_text
+		= addresses_header
+	- if params[:controller]=='freezers'
+		.download_button
+			= render 'download_addr_button'

@@ -1,0 +1,4 @@
+table.private_output id="private_output" 
+	= render 'shared/private_headers'
+	- keys.each do |row|
+		= render 'shared/private_row', row: row, counter: keys.index(row)+1

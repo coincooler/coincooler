@@ -1,0 +1,2 @@
+- pick = [0,params[:howmany].to_i].max
+= select_tag(:howmany, options_for_select(array,selected: pick ), class: 'pulldown small', onchange: "showShares(#{params[:howmany]});")

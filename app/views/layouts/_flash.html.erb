@@ -1,0 +1,34 @@
+<div class="container center watch-head">
+	<% flash.each do |key, value| %>
+		<% message = '' %>
+		<% title = '' %>
+		<% if value.class==Hash %>
+			<% message = value[:message].to_s %>
+			<% title = value[:title].to_s %>
+			<% hide = value[:hide].to_s %>
+			<% rnd = rand(10000..99999).to_s %>
+			<% delay = value[:delay_seconds].to_i %>
+			<% id = value[:id].to_s %>
+			<% id = if id.blank? then rnd else id end %>
+			<% id = "flash_"+id %>
+			<% close = value[:close].to_s %>
+		<% else  %>
+			<% message = value.to_s %>
+		<% end %>
+		<div class="alert alert-<%= key %> tight border" id="<%= id %>">
+			<% unless close=='false' %>
+				<a class="close" data-dismiss="alert">&#215;</a>
+			<% end %>
+			<%= content_tag(:div, message, class: "tight", title: title) unless [:keys].index(key) %> 
+		</div>
+		<% if hide=='true' %>
+			<script type="text/javascript">
+				$('#<%= id %>').hide();
+			</script>
+		<% elsif delay.to_i > 0 %>
+			<script type="text/javascript">
+				$('#<%= id %>').delay(parseInt('<%= delay*1000 %>')).fadeOut(2000)
+			</script>
+		<% end %>
+	<% end %>
+</div>

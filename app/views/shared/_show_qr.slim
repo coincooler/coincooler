@@ -1,0 +1,1 @@
+= link_to (render 'shared/qr', qr: qr, id: id),  request.fullpath[0..-(request.query_parameters.to_a.flatten.join.length+3)], title: "#{if request.query_parameters.blank? then "Show QR Code" else "Hide QR Code" end}",class: "collapse-qr", id: 'hide_qr', data: {disable_with: "....."}

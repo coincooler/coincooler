@@ -1,0 +1,21 @@
+<% environment.context_class.instance_eval { include ViewsHelper } %>
+
+$(function(){
+	$('[title]').attr('rel','tooltip');
+	$("td.download [title][rel='tooltip']").attr('data-placement','left');
+	$("div.tight [title][rel='tooltip']").attr('data-placement','bottom');
+	$(".download_button [title][rel='tooltip']").attr('data-placement','left');
+	$(".download_keys_button [title][rel='tooltip']").attr('data-placement','left');
+	$('[title^="<%= qr_button_title %>"][rel="tooltip"]').attr('data-placement','left');
+	$('[title="<%= pbkdf_alert_title %>"][rel="tooltip"]').attr('data-placement','right');
+	$("[title='Delete all checked files'][rel='tooltip']").attr('data-placement','left');	
+	$("[title='Email me'][rel='tooltip']").attr('data-placement','top');	
+	$("[title='Check all'][rel='tooltip']").attr('data-placement','left');
+	$('[title^="<%= generate_button_title %>"][rel="tooltip"]').attr('data-placement','bottom');
+	$('[title="<%= freeze_button_title %>"][rel="tooltip"]').attr('data-placement','bottom');
+	$('[title="<%= inspect_page_title %>"][rel="tooltip"]').attr('data-placement','bottom');
+	$('[title^="<%= recover_button_title %>"][rel="tooltip"]').attr('data-placement','bottom');
+	$('[title="<%= home_link_title %>"][rel="tooltip"]').attr('data-placement','bottom');
+	$('[title="<%= advanced_options_button %>"][rel="tooltip"]').attr('data-placement','right');
+  $("[rel='tooltip']").tooltip();
+});

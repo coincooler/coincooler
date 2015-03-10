@@ -1,0 +1,97 @@
+<% environment.context_class.instance_eval { include ActionView::Helpers::JavaScriptHelper } %>
+<% environment.context_class.instance_eval { include ViewsHelper } %>
+
+
+function exposePrivateKey(e) {
+  if( !e ) e = window.event; //to make it work on FireFox http://stackoverflow.com/questions/7457260/event-target-not-working-on-firefox
+  var dom_id=e.target.id;  
+  row=getRow(dom_id);    
+  $.prompt("Make sure you are not being watched. Anyone holding this key can control the funds in address #"+row, {
+      title: "Security Alert!",
+      buttons: { "Yes, show me the key": true, "Not now": false },
+      position: { container: '#prvkey_wif_'+row, x: 170, y: 0, width: 300, arrow: 'lt' },
+      submit: function(e,v,m,f){
+          // use e.preventDefault() to prevent closing when needed or return false. 
+          // e.preventDefault();           
+          if (v) {toggleAll(row);};
+          
+      }
+  });
+};
+
+function exposePassword(e) {
+  if( !e ) e = window.event; //to make it work on FireFox http://stackoverflow.com/questions/7457260/event-target-not-working-on-firefox   
+  $.prompt("Make sure you are not being watched. Anyone holding this password can decrypt your cold storage file", {
+      title: "Security Alert!",
+      buttons: { "Yes, show me the password": true, "Not now": false },
+      position: { container: '#password', x: 170, y: 0, width: 300, arrow: 'lt' },
+      submit: function(e,v,m,f){
+          // use e.preventDefault() to prevent closing when needed or return false. 
+          // e.preventDefault();           
+          if (v) {togglePassword();};
+          
+      }
+  });
+};
+
+function toggleAll(value) {
+  if (value>0) {
+    $('#show_prvkey_'+value).toggle();
+    $('#hide_prvkey_'+value).toggle();
+    $('#show_prvkey_qr_btn_'+value).toggle();
+    $('#hide_prvkey_qr_btn_'+value).toggle();        
+  } 
+};
+
+function toggleAdvancedOptionsLink() {
+  $('#minus').toggle();
+  $('#plus').toggle();
+};
+
+function toggleUpDownArrow() {  
+  $('#up'+this.id).toggle();
+  $('#down'+this.id).toggle();
+};
+
+function toggleUpDownArrowById(id) {  
+  $('#up'+id).toggle();
+  $('#down'+id).toggle();
+};
+
+function toggle(value) {
+  if (value>0) {
+    $('#show_prvkey_'+value).toggle();
+    $('#hide_prvkey_'+value).toggle();
+  } 
+};
+
+function togglePassword() {
+  $('#show_password').toggle().css('display','inline');
+  $('#hide_password').toggle();
+};
+
+function debug(value) {
+  console.log(value);
+};
+
+function getRow(dom_id){
+  row=0;
+  if (dom_id.indexOf('_qr_')>0) {
+    row=parseInt(dom_id.substring('prvkey_qr_btn_'.length,100));
+  } else {
+    row=parseInt(dom_id.substring('hidden_prvkey_'.length,100));
+  }
+  return row;
+};
+
+function pbkdfAlert(){
+  if (typeof($('button:first').attr('pswd')) != 'undefined') {
+    if ($('button:first').attr('pswd').length>0) {
+      $('#pbkdfalertwrap').toggle();
+      // $('#generate_button').prop('disabled', true);
+      // $('#advanced_options').toggle();
+      // $('#recover').css('position','absolute').css('opacity',0.01);
+      // $('#password').css('position','absolute').css('opacity',0.01);
+    };    
+  };  
+};

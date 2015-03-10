@@ -1,0 +1,17 @@
+table#jqup.forcenter_horiz
+	tr
+		td
+			= render 'jquery_upload'
+= form_tag({action: :inspect}) do
+	table#uptbl.forcenter_horiz
+		tr#password.hide
+			td
+				= render 'shared/password', pholder: recover_passwd_placeholder 
+			td style="padding-top:5;padding-bottom:7;"
+				= render 'upload_password'
+				= render 'upload_shares'								
+		tr#recover.hide
+			td
+				= button_tag(type: "submit", id: "recover_button", class: "btn btn-primary btn-large", onclick: "#{if PI then 'pbkdfAlert();$(".tooltip").remove();' end}", title: recover_button_title, data: { disable_with: "<i class='icon-refresh icon-white'></i>&nbsp; #{recover_button_action}" } ) do
+					= image_tag('sunglasses_white.png', size: "20")
+					span#recbutext = ' '+recover_button

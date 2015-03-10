@@ -1,0 +1,9 @@
+- flash = []
+- message_array=[]
+- @n.times do |n|
+ - message_array << "A file containing row number #{n+1}"	
+- message_array.each do |prefix|
+	- flash << [:success,{message: prefix+row_success_copy_suffix,title: success_copy_title(cold_storage_directory_name),hide: true, close: false}]
+- flash << [:error, {message: no_usb_message,title: 'insert a USB drive',hide: true,delay_seconds: 30, id:'no_usb_message', close: false}]
+- flash << [:info, {message: "You can use the download buttons to download a private key #{'to your USB stick' if usb?}", hide: false,id: 'instruction',close: false}]
+= render 'layouts/flash', flash: flash

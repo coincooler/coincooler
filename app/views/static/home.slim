@@ -1,0 +1,28 @@
+= render 'static/home_flash'
+- cache('home')	do
+	.container.forcenter_horiz
+		.home
+			table
+				tr
+					td colspan="2"
+						div#catchy.big
+							= catch_phrase_big
+				tr
+					td colspan="2"
+						div#catchy.small
+							= catch_phrase_small							
+				- unless PI							
+					tr
+						td colspan="2"
+							div#elevator
+								= elevator_pitch
+				tr
+					td
+						= link_to(freeze_path, id: 'big_freeze_button', class: "btn btn-primary btn-large", title: big_freeze_button_title, data: {disable_with: "<i class='icon-refresh icon-white icontweak'></i>#{big_freeze_button}"}) do
+							i.icon-play.icon-white.icontweak 
+							= big_freeze_button
+					td
+						= link_to(uploads_path, id: 'big_inspect_button', class: "btn btn-success btn-large", title: big_inspect_button_title, data: {disable_with: "<i class='icon-refresh icon-white icontweak'></i>#{big_inspect_button}"}) do
+							i.icon-arrow-up.icon-white.icontweak 
+							= big_inspect_button
+= javascript_include_tag 'home_flash'

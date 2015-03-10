@@ -1,0 +1,63 @@
+<% environment.context_class.instance_eval { include PathHelper } %>
+
+function getUploadedArray(){
+	var ar=[];
+  $.each($('td.name a'), function( index, value ) {		
+		if (ar.indexOf($(this).attr('title'))<0)  {ar.push($(this).attr('title'));}
+	});
+	return ar;
+}
+
+function searchStringInArray (str, strArray) {
+    for (var j=0; j<strArray.length; j++) {
+        if (strArray[j].match(str)) return j;
+    }
+    return -1;
+};
+function toggleSubmitButton() {
+	if ($('#uplist td.name').length > 0) {
+		$('tr#recover').show();
+		if ($('#uplist td.name').length == 1 && $('#upload_shares').is(":checked")!=true && $('#upload_password').is(":checked")!=true) {
+			$('span#upbut').css('opacity',0.01);	
+		};		
+	}	else {
+		$('tr#recover').hide();
+		$('span#upbut').css('opacity',1)
+	}
+};
+function togglePasswordAndShares() {
+	if ($('#uplist td.name').length > 0) {
+		$('#password').show();
+	}	else {
+		$('#password').hide();
+	}
+};
+function toggleDeleteAll() {
+	if ($('#uplist td.name').length > 0) {
+		$('button#del_all').show();
+		$('input#upload_del_all').show();		
+	}	else {
+		$('button#del_all').hide();
+		$('input#upload_del_all').hide();
+	}
+};
+function togglePasswordInput(array) {
+	if (searchStringInArray(".csv",array)>-1 && searchStringInArray("<%= short_efs %>",array)>-1 && searchStringInArray("<%= txt_suffix %>",array)>-1 && $('#password').is(":hidden")) {
+		$('#password').show();
+		$('#password input#keyboard').css('border','1px solid blue');
+	} else if (searchStringInArray("<%= short_efs %>",array)==-1 && $('#password').is(":visible")) {
+		$('#password').hide();
+	}
+}
+function alignDeleteAll(){
+	if ($('#delall').length > 0) {
+		$("#upload_del_all").css({left: $('#delall').position()['left'], position:'absolute'});	
+	};
+	if ($('#delbut').length > 0) {
+		$("#del_all").css({left: $('#delbut').position()['left']-6, position:'absolute'});	
+	};	
+}
+function triggerOnUpload() {	
+ 	observersDuties();
+	togglePasswordInput(getUploadedArray()); 
+};

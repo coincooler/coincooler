@@ -1,0 +1,7 @@
+td.text_pubkey id="address_#{counter}"
+	= row[:addr]
+td.qr_pubkey id="qr_address_#{counter}"
+	- if @expose=='address_qr_btn_'+counter.to_s			
+		= render 'shared/show_qr', qr: generate_qr(row[:addr]), id: 'address:' + row[:addr] 
+	- else
+		= render 'shared/qr_button', id: "address_qr_btn_#{counter}"

@@ -1,0 +1,53 @@
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+  /*background-color: #f9f9f9;*/
+  background-color: #C7C7C7;
+}
+/*td.delete{
+	width:50%;
+	float: right;
+}*/
+td.cancel{
+	width:15%;
+}
+td.size{
+	width:7%;
+	font-size: 10;
+}
+td.name{
+	width:50%;
+}
+td.separator{
+	width:5%;
+}
+td.error{
+    width:20%;
+	font-size: 10;
+}
+td.delete{
+    width: 15%;
+}
+/*td.progbar{
+    width: 20%;
+}*/
+button.btn.btn-danger.delete, button.btn.btn-warning.cancel{
+	margin-left: 5;
+	margin-right: 5;
+}
+table#uplist{
+	width: 90%;
+}
+.new_upload{
+    line-height: 0;
+    margin-bottom: 0;
+}
+.blue-border{
+    border: 1px solid blue;
+}
+.upshares{
+    font-size: 12;
+    padding-left: 20;
+}
+.container#upload{
+  margin-top:50;
+}

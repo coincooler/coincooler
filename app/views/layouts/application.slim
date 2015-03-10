@@ -1,0 +1,16 @@
+- c = params[:controller]
+doctype
+html
+  head
+    title
+      = full_title(@title)
+    = render 'layouts/favicon'
+    = render 'layouts/shim'
+  body class="#{c}"
+    = render 'layouts/includes'
+    = render 'layouts/header'
+    = render 'layouts/flash'
+    = yield
+    = render 'layouts/debug' if DEBUG
+    = render 'layouts/scripts'
+.background    

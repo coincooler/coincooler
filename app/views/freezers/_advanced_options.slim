@@ -1,0 +1,5 @@
+div#collapse.collapse
+	= render 'howmany_addresses', array: (1..KEYS_LIMIT).to_a
+	= render 'shared/password', pholder: enter_password_placeholder
+	= render 'ssss'
+= javascript_include_tag 'noscroll'

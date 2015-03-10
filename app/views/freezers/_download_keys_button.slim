@@ -1,0 +1,28 @@
+div.btn-group.bottom5 
+  button#download_keys.btn.btn-primary.dropdown-toggle type='button' data-toggle='dropdown'
+    i.icon-arrow-down.icon-white
+    = "Download Keys"
+    span.caret
+  ul.dropdown-menu role='menu'    
+    li.private title="#{download_unencrypted_title}"
+      = link_to(download_path(download: :unencrypted_private_keys),class: "private",id: "download_plain", remote: @remote)
+        i.icon-arrow-down
+        = download_non_encrypted_link
+    li title="#{download_password_title}"
+      = link_to(download_path(download: :password),class: "private",id: "download_pswd", remote: @remote)
+        i.icon-arrow-down
+        = download_password_link        
+    li.divider
+    li title="#{download_encrypted_title}"
+      = link_to(download_path(download: :encrypted_private_keys),class: "public",id: "download_enc", remote: @remote)
+        i.icon-arrow-down
+        = download_encrypted_link
+    - unless $split.blank?
+      li
+        - @n.times do |n|
+          = link_to(download_path(download: :password_share,share: "#{n+1}"),class: "public", id: "password_share_#{n+1}",remote: @remote, title: " #{if COPY then "Save" else "Download" end} a file containing the #{(n+1).to_i.ordinalize} share for the password #{"\n to a USB drive" if COPY}")
+            i.icon-arrow-down
+            = " Share ##{n+1}"
+
+
+= javascript_include_tag 'download_keys' if @remote

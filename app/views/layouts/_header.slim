@@ -1,0 +1,9 @@
+header.navbar.navbar-fixed-top.navbar-inverse.hide_on_download
+  .navbar-inner
+    .container
+      = link_to(home_path, id: "logo", title: "#{home_link_title unless [root_path, home_path].include?(request.fullpath)}") do
+      	= image_tag('coincooler-white.ico', size: "31", class: "logo")
+      	= app_title
+      nav
+        ul#head-links.nav.pull-right
+					= render 'layouts/app_links'

@@ -1,0 +1,12 @@
+$('[id^="download_row_"]').bind('ajax:complete', function() {
+	if (document.cookie.match(/no_usb/)) {
+		clearFlashes();
+		$('.alert:contains("No USB storage detected")').show().delay(slow).fadeOut(fade);	
+	} else if (document.cookie.match(/missing_files/)) {
+		window.location.replace("/");
+	}	else {
+		clearFlashes();
+		var row_number=(this.id+"").substring('download_row_'.length);
+		$('.alert:contains(row number '+row_number+' was)').show().delay(slow).fadeOut(fade);
+	};
+});

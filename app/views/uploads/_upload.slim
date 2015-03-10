@@ -1,0 +1,32 @@
+.container#upload
+  / h2.view_header
+  /   = inspect_page_header
+  = form_for Upload.new, :html => { :multipart => true, :id => "fileupload"  } do |f|
+    /! The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload
+    .row.fileupload-buttonbar
+      .span7
+        /! The fileinput-button span is used to style the file input field as button
+        span#upbut.btn.btn-success.btn-large.fileinput-button 
+          i.icon-arrow-up.icon-white
+          span#upbutext ="#{upload_button}"
+          = f.file_field :upload
+        / button#start.btn.btn-primary.start type="submit" 
+        /   i.icon-upload.icon-white
+        /   span Start upload          
+        / button#cancel.btn.btn-warning.cancel type="reset" 
+        /   i.icon-ban-circle.icon-white
+        /   span Cancel upload
+        button#del_all.btn.btn-danger.delete.hide type="button" title="Delete all checked files" 
+          i.icon-trash.icon-white
+          span 
+        input#upload_del_all.toggle.hide type="checkbox" title="Check all" 
+      .span5
+        /! The global progress bar
+        / .progress.progress-success.progress-striped.active.fade
+        /   .bar style="width:0%;" 
+    /! The loading indicator is shown during image processing
+    .fileupload-loading
+    br
+      /! The table listing the files available for upload/download
+      table.table.table-striped#uplist
+        tbody.files data-target="#modal-gallery" data-toggle="modal-gallery" 

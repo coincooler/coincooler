@@ -1,0 +1,14 @@
+h2.view_header
+	= inspect_page_header
+= form_tag({action: :create}, multipart: true) do
+	table#setup_upload
+		tr
+			td valign="top"
+				table#basic_setup
+					= render 'basic_setup'
+			td.upload valign="top"
+				table#upload_shares
+					tr
+						th#upload_shares_header
+							| Upload Shares				
+					= render 'old_upload_shares'

@@ -1,0 +1,11 @@
+- c = params[:controller]
+- a = params[:action]
+- freeze = (c=='freezers' && a=='new')
+- inspect = (c=='uploads' && a=='index')
+
+li 
+	= link_to freeze_path, id: 'navbar_freeze', title: freeze_button_title, class: "#{'bevel' if freeze}" do
+			i.icon-play.icon-white
+li 
+	= link_to uploads_path, id: 'navbar_upload', title: inspect_button_title, class: "#{'bevel' if inspect}" do
+			i.icon-arrow-up.icon-white

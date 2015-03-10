@@ -1,0 +1,30 @@
+tr
+	td
+		= file_field_tag 'file',:accept => "text/csv", class: 'file_upload'
+tr
+	td colspan="3" 
+		hr.low 
+tr
+	td
+		= render 'shared/password', pholder: recover_passwd_placeholder 
+tr
+	td 
+		hr
+tr
+	td 
+		= text_area_tag :shares,'', placeholder: shares_placeholder, size: "25x5"		
+tr
+	td 
+		hr
+tr
+	td
+		div.left
+			| Or, upload	 
+			= render 'howmany_shares', array: (0..SHARES_LIMIT).to_a
+			| shares
+tr
+	td 
+		hr.low
+tr
+	td 
+		= submit_tag recover_button,  id: "recover_button", class: "btn btn-primary btn-large"

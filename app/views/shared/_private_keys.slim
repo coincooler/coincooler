@@ -1,0 +1,9 @@
+- cache('pk', skip_digest: true) do
+	table#pktable.forcenter_horiz
+		tr
+			td
+				= render 'shared/private_table', keys: @keys
+		- if params[:controller]=='freezers'
+			tr
+				td
+					= render 'shared/password_safe_display'

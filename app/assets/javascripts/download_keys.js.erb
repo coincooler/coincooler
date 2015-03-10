@@ -1,0 +1,19 @@
+// $('#download_plain').bind('ajax:beforeSend', function() {
+//   alert('foo');
+// });
+popFlash('download_addr',"Bitcoin addresses");
+popFlash('download_plain',"NON-ENCRYPTED");
+popFlash('download_enc',"Encrypted private keys");
+popFlash('download_pswd',"Password file");
+
+$('[id^="password_share_"]').bind('ajax:complete', function() {
+	clearFlashes();
+	if (document.cookie.match(/no_usb/)) {
+		$('.alert:contains("No USB storage detected")').show().delay(slow).fadeOut(fade);	
+	} else if (document.cookie.match(/missing_files/)) {
+		window.location.replace("/");
+	}	else {
+		var share_number=(this.id+"").substring('password_share_'.length);
+		$('.alert:contains("password share"):contains('+share_number+')').show().delay(slow).fadeOut(fade);
+	};
+});
