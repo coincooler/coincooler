@@ -1,2 +1,3 @@
+# CoinCooler
 ## Bitcoin Cold Storage on a Raspberry Pi 
-# [*CoinCooler*](http://coincooler.com/)
+## visit [*coincooler.com*](http://coincooler.com/)
