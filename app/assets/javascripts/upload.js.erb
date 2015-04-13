@@ -25,7 +25,8 @@ function toggleShareUpload() {
 		$('span#upbut').css('opacity',0.01);
 		$('#upbutext').text("<%= upload_button %>");
 		$('input#keyboard').css('opacity',1);
-	};	
+	};
+	$('button:first').attr('pswd','upload_shares');
 }
 function togglePassUpload() {
 	if ($('#upload_password').is(":checked")) {
@@ -41,7 +42,8 @@ function togglePassUpload() {
 		$('span#upbut').css('opacity',0.01);
 		$('#upbutext').text("<%= upload_button %>");
 		$('input#keyboard').css('opacity',1);
-	};	
+	};
+	$('button:first').attr('pswd','upload_password');	
 }
 function togglePostPassUpload() {
 	if ($('#upload_shares').is(":checked")!=true && $('#uplist td.name').length > 1) {

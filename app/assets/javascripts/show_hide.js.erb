@@ -87,11 +87,19 @@ function getRow(dom_id){
 function pbkdfAlert(){
   if (typeof($('button:first').attr('pswd')) != 'undefined') {
     if ($('button:first').attr('pswd').length>0) {
-      $('#pbkdfalertwrap').toggle();
-      // $('#generate_button').prop('disabled', true);
-      // $('#advanced_options').toggle();
-      // $('#recover').css('position','absolute').css('opacity',0.01);
-      // $('#password').css('position','absolute').css('opacity',0.01);
+        setTimeout(function() {
+          $('#pbkdfalertwrap').toggle();
+        }, 2000); 
     };    
   };  
 };
+function pbkdfDelayAlert(){
+  if (typeof($('button:first').attr('pswd')) != 'undefined') {
+    if ($('button:first').attr('pswd') = 'upload_shares' ) {
+        setTimeout(function() {
+          $('#pbkdfalertwrap').toggle();
+        }, 2000);      
+    };    
+  };  
+};
+
