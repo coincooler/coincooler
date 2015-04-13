@@ -1,6 +1,6 @@
 div.checkbox style="margin-left:20;"
 	div.input-xxlarge style="float:right;color:gray;"
-		= label_tag ' upload password shares'
+		= label_tag "upload_shares",' upload password shares'
 	div.inline 
-		= check_box_tag('upload_shares',0,false, onclick: "toggleShareUpload();")
+		= check_box_tag('upload_shares',0,false,id: "upload_shares", onclick: "toggleShareUpload();")
 	
