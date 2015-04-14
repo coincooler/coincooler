@@ -282,7 +282,7 @@ module ViewsHelper
 		end
 	end
 	def pbkdf_alert_message
-		'This action is slow on purpose (up to 1 minute) for enhanced security.'
+		'This action is slow on purpose for enhanced security. Please wait (up to 1 minute).'
 	end
 	def pbkdf_alert_prefix
 		'To protect against brute force attacks your password is processed '

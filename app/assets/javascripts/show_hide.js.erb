@@ -89,17 +89,8 @@ function pbkdfAlert(){
     if ($('button:first').attr('pswd').length>0) {
         setTimeout(function() {
           $('#pbkdfalertwrap').toggle();
+          $('#pbkdfalertwrap').css('width','100%');
         }, 2000); 
     };    
   };  
 };
-function pbkdfDelayAlert(){
-  if (typeof($('button:first').attr('pswd')) != 'undefined') {
-    if ($('button:first').attr('pswd') = 'upload_shares' ) {
-        setTimeout(function() {
-          $('#pbkdfalertwrap').toggle();
-        }, pbkdf_delay);      
-    };    
-  };  
-};
-
