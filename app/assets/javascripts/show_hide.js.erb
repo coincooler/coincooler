@@ -1,6 +1,6 @@
 <% environment.context_class.instance_eval { include ActionView::Helpers::JavaScriptHelper } %>
 <% environment.context_class.instance_eval { include ViewsHelper } %>
-
+var pbkdf_delay = parseInt("<%= PBKDF_ALERT_DELAY_SECONDS*1000 %>");
 
 function exposePrivateKey(e) {
   if( !e ) e = window.event; //to make it work on FireFox http://stackoverflow.com/questions/7457260/event-target-not-working-on-firefox
@@ -98,7 +98,7 @@ function pbkdfDelayAlert(){
     if ($('button:first').attr('pswd') = 'upload_shares' ) {
         setTimeout(function() {
           $('#pbkdfalertwrap').toggle();
-        }, 2000);      
+        }, pbkdf_delay);      
     };    
   };  
 };

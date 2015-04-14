@@ -18,4 +18,5 @@ ENCRYPTION_LIBRARY = CryptoHelper::check_pbkdf2
 ID = rand(100000..999999)
 FLASH_DELAY_SECONDS = (if PI then 5 else 3 end)
 FLASH_FADE_SECONDS = 2
+PBKDF_ALERT_DELAY_SECONDS = (if PI then 3 else 1 end)
 VERSION = 10

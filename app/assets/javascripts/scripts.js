@@ -18,5 +18,4 @@ $( document ).ready(function() {
 window.onresize = function() {
     $('.forcenter_horiz').horiz_center_scroll();
     alignDeleteAll();
-    fixFooter();
 };
