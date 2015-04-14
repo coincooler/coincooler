@@ -105,7 +105,7 @@ module ViewsHelper
 		"Inpsect the content of the cold storage file you just uploaded"
 	end
 	def inspect_button_title
-		inspect_page_title
+		"Upload Cold Storage files for inspection"
 	end
 	def big_inspect_button_title
 		'Upload existing cold storage files to inspect the list of Addresses and Private Keys'
