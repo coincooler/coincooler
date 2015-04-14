@@ -55,14 +55,14 @@ Spork.each_run do
   # This code will be run each time you run your specs.
 end
 
-# Capybara.register_driver :chrome do |app|
-#   Capybara::Selenium::Driver.new(app, :browser => :chrome)
-# end
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+Capybara.javascript_driver = :chrome
 
 # require 'capybara/poltergeist'
 # Capybara.javascript_driver = :poltergeist
 
-# Capybara.javascript_driver = :chrome
 def jquery_attach_file(dom_id, path, element_name='seleniumUpload')
   page.execute_script(element_name + " = window.$('<input/>').attr({id: '"+element_name+"', type:'file'}).appendTo('body');")
   attach_file element_name, path     

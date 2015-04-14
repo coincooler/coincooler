@@ -4,8 +4,8 @@ shared_examples_for "all pages" do
 end
 
 shared_examples_for "app pages" do
-	it { should have_link(freeze_button, href: freeze_path)}
-	it { should have_link(inspect_button, href: uploads_path)}
+	it { should have_link('navbar_freeze', href: freeze_path)}
+	it { should have_link('navbar_upload', href: uploads_path)}
 end
 
 shared_examples_for "the freeze page" do
