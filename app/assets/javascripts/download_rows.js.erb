@@ -1,3 +1,5 @@
+var flasher = 0;
+
 $('[id^="download_row_"]').bind('ajax:complete', function() {
 	if (document.cookie.match(/no_usb/)) {
 		clearFlashes();
@@ -5,8 +7,10 @@ $('[id^="download_row_"]').bind('ajax:complete', function() {
 	} else if (document.cookie.match(/missing_files/)) {
 		window.location.replace("/");
 	}	else {
-		clearFlashes();
 		var row_number=(this.id+"").substring('download_row_'.length);
-		$('.alert:contains(row number '+row_number+' was)').show().delay(slow).fadeOut(fade);
+		if (flasher == 0){
+			flasher =1;
+			animateFlash($('.alert:contains(row number '+row_number+' was)'));	
+		};		
 	};
 });
