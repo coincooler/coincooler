@@ -89,6 +89,14 @@ describe "Uploads:" do
 			page.should have_selector('td.text_pubkey#address_10', text: '1CXaVvECDcvBb8PFMJAsCPGhqkKwP1tD8K')
 			page.should_not have_selector('td.text_pubkey#address_11')
 		end
+		describe "download upload link should" do
+			describe "save the uploaded addresses file to the usb location" do
+				before do
+				  click_link download_upload_button
+				end					
+				specify{File.exist?(coldstorage_directory(true)+File.basename(test_pa)).should be_true }
+			end			
+		end		
 	end
 	describe "loading an UN-encrypted private keys csv file", :js => true, slow: true do
 	  before do
@@ -120,6 +128,14 @@ describe "Uploads:" do
 				end
 			end
 		end
+		describe "download upload link should" do
+			describe "save the uploaded keys file to the usb location" do
+				before do
+				  click_link download_upload_button
+				end					
+				specify{File.exist?(coldstorage_directory(true)+File.basename(test_pk)).should be_true }
+			end			
+		end		
 	end
 	describe "uploads page after uploading one encrypted file", :js => true, slow: true do
 	  before do

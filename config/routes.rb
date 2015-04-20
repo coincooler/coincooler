@@ -13,6 +13,7 @@ Coincooler::Application.routes.draw do
   match "/new_keys",                  to: 'freezers#show',        		via: :get
   match	"/download",				          to: 'freezers#download',				via: :get
   match "/download_row",              to: 'inspectors#download',      via: :get
+  match "/download_up",               to: 'uploads#download',         via: :get
   match "/old_inspect",	              to: 'inspectors#new',           via: :get
   match "/old_inspect_addresses",     to: 'inspectors#addresses',     via: :get
   match "/old_inspect_keys",          to: 'inspectors#show',          via: :get

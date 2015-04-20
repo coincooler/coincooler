@@ -125,6 +125,20 @@ class UploadsController < ApplicationController
     @keys = $keys
   end
 
+  def download
+    begin
+      if COPY
+        copy_uploaded_file
+      else
+        download_uploaded_file
+      end
+    rescue => e
+      logger.warn(e.to_s) 
+      flash[:error]= {message: missing_file_error,delay_seconds: 5, id: 'missing_file'}
+      redirect_to home_path       
+    end
+  end
+
   private
 
     def upload_params
@@ -133,4 +147,26 @@ class UploadsController < ApplicationController
     def instructions_flash
       {message: "You can use the download buttons to download a private key #{'to your USB stick' if usb?}", hide: false,id: 'instruction',close: !COPY} 
     end
+    def copy_uploaded_file
+      if !dynamic_usb_mount
+        cookies[:copy] = 'no_usb'
+        flash[:danger] = {message: no_usb_message,title: 'Insert a USB drive',delay_seconds: FLASH_DELAY_SECONDS,id: 'no_usb'}
+      else
+        set_copy_cookie
+        file = Upload.last
+        origin = file.upload.path
+        filename = file.upload_file_name
+        target=coldstorage_directory(true)+filename
+        FileUtils.mkdir_p File.dirname(target)
+        FileUtils.cp(origin,target)
+        flash[:success] = {message: "#{filename} "+success_copy_suffix,title: success_copy_title(cold_storage_directory_name),delay_seconds: FLASH_DELAY_SECONDS,id: "download_upload"}
+      end
+      redirect_to old_inspect_keys_path
+    end
+    def download_uploaded_file
+      file = Upload.last
+      filepath = file.upload.path
+      filename = file.upload_file_name      
+      send_file filepath, filename: filename
+    end    
 end

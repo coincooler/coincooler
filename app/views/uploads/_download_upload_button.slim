@@ -1,0 +1,5 @@
+= link_to(download_up_path(download: :upload),class: "btn btn-primary",id: "download_upload", remote: @remote ,title: download_upload_title)
+	i.icon-arrow-down.icon-white
+	= ' '+download_upload_button
+= javascript_include_tag 'download_upload' if @remote
+ 

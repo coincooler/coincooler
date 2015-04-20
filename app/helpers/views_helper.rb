@@ -189,6 +189,9 @@ module ViewsHelper
 	def download_addresses_button
 		'Download Addresses'
 	end
+	def download_upload_button
+		'Download File'
+	end	
 	def home_link_title
 		'CoinCooler Home page'
 	end
@@ -210,6 +213,13 @@ module ViewsHelper
 	def qr_button
 		'Show QR'
 	end
+	def download_upload_title
+		if COPY
+			'Save this file to a USB drive'	
+		else
+			'Download this file'
+		end		
+	end		
 	def qr_button_title
 		if PI
 			"Show QR code (slow, takes about 25 seconds)"

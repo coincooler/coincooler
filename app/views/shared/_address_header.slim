@@ -3,4 +3,7 @@ th.title_pubkey colspan="2"
 		= addresses_header
 	- if params[:controller]=='freezers'
 		.download_button
-			= render 'download_addr_button'
+			= render 'freezers/download_addr_button'
+	- else
+		.download_button
+			= render 'uploads/download_upload_button'
