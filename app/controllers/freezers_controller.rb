@@ -4,7 +4,6 @@ class FreezersController < ApplicationController
 	before_filter :clear_flash_messages
 	before_filter	:redirect_home,						only: [:show, :download]
 
-
   def new
 		@title=freeze_page_title
 	end
@@ -70,38 +69,35 @@ class FreezersController < ApplicationController
 				set_copy_cookie
 				case params[:download]
 				when /addresses/					
-					FileUtils.mkdir_p public_directory_path(true)
 					origin=public_addresses_file_path('csv',false)
 					target=public_directory_path(true)+addresses_file_name+'.csv'
+					FileUtils.mkdir_p File.dirname(target)
 			  	FileUtils.cp(origin,target)			  	
 			  	flash[:success] = {message: "Bitcoin addresses"+success_copy_suffix,title: success_copy_title(cold_storage_directory_name),id: 'addr_download_success'}
 			  when 'unencrypted_private_keys'	
-			  	FileUtils.mkdir_p unencrypted_directory_path(true)
+			  	
 			  	origin = private_keys_file_path('csv',false)
 			  	target = unencrypted_directory_path(true)+private_keys_file_name+'.csv'
+			  	FileUtils.mkdir_p File.dirname(target)
 			  	FileUtils.cp(origin,target)
 			  	flash[:success] = {message: "NON-ENCRYPTED private keys"+success_copy_suffix,title: success_copy_title(cold_storage_directory_name),id: 'plain_download_success'}
 			  when 'encrypted_private_keys'
-			  	FileUtils.mkdir_p encrypted_directory_path(true)
 			  	origin = private_keys_file_path('csv',true)
 			  	target = encrypted_directory_path(true)+private_keys_file_name+'.csv'+encrypted_file_suffix
+			  	FileUtils.mkdir_p File.dirname(target)
 			  	FileUtils.cp(origin,target)
 			  	flash[:success] = {message: "Encrypted private keys"+success_copy_suffix,title: success_copy_title(cold_storage_directory_name),id: 'encrypted_download_success'}
 				when 'password'	  	
-					FileUtils.mkdir_p public_directory_path(true)
 					origin=password_file_path('csv',false)
 					target=encrypted_directory_path(true)+password_file_name+'.csv'
+					FileUtils.mkdir_p File.dirname(target)
 			  	FileUtils.cp(origin,target)		  	
 			  	flash[:success] = {message: "Password"+success_copy_suffix,title: success_copy_title(cold_storage_directory_name),id: 'pass_download_success'}
 			  when 'password_share' 
-			  	FileUtils.mkdir_p encrypted_directory_path(true)
 			  	origin = password_shares_path(params[:share].to_i)
 			  	target = encrypted_directory_path(true) +password_share_file_name + '_' + params[:share].to_i.to_s + '.csv'
+			  	FileUtils.mkdir_p File.dirname(target)
 			  	FileUtils.cp(origin,target)
-			  	# origin = private_keys_file_path('csv',true)
-			  	# target = encrypted_directory_path(true)+private_keys_file_name+'.csv'+encrypted_file_suffix
-			  	# FileUtils.cp(origin,target)			  	
-			  	# flash[:success] = ["Encrypted private keys and the #{params[:share].to_i.ordinalize} share for the password were" +success_copy_suffix,success_copy_title(cold_storage_directory_name), false, FLASH_DELAY_SECONDS, "share_#{params[;share].to_s}_download_success"]
 			  	flash[:success] = {message: "#{params[:share].to_i.ordinalize} password share" +success_copy_suffix,title: success_copy_title(cold_storage_directory_name),id: "share_#{params[:share].to_s}_download_success"}
 			  else
 			  	redirect_to home_path

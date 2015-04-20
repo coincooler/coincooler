@@ -27,7 +27,11 @@ class Quartermaster
 	end	
 
 	def save_encrypted_private_keys
-		save_unencrypted_private_keys unless File.exist?(private_keys_file_path('csv',false))		
+		save_unencrypted_private_keys unless File.exist?(private_keys_file_path('csv',false))
+		path = File.expand_path private_keys_file_path('csv',true)
+		dirpath = File.dirname(path)
+  	FileUtils.mkdir_p dirpath
+  	FileUtils.chmod 'a+w', dirpath
 		@password=encrypt(@password,private_keys_file_path('csv',false))
 		FileUtils.mv(private_keys_file_path('csv',false)+encrypted_file_suffix,private_keys_file_path('csv',true))
 	end

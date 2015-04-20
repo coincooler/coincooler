@@ -4,7 +4,11 @@ module FilesHelper
 	include PathHelper
 	
 	def save_file(path, data)
-		File.open(path,'w') {|file| file.write data }
+		path = File.expand_path path
+		dirpath = File.dirname(path)
+  	FileUtils.mkdir_p dirpath
+  	FileUtils.chmod 'a+w', dirpath
+		File.open(path,'w+') {|file| file.write data }
 	end
 
 	def delete_file(path)
@@ -22,6 +26,10 @@ module FilesHelper
 	end
 
 	def save_csv(path,header_array,data_nested_array)
+		path = File.expand_path path
+		dirpath = File.dirname(path)
+  	FileUtils.mkdir_p dirpath
+  	FileUtils.chmod 'a+w', dirpath		
 		CSV.open(path,"wb",col_sep: ",") do |csv|
 			csv << header_array
 			data_nested_array.each do |row|
@@ -30,6 +38,10 @@ module FilesHelper
 		end
 	end
 	def save_enum_csv(path,header_array,data_nested_array, start_position=1)
+		path = File.expand_path path
+		dirpath = File.dirname(path)
+  	FileUtils.mkdir_p dirpath
+  	FileUtils.chmod 'a+w', dirpath		
 		CSV.open(path,"wb",col_sep: ",") do |csv|
 			csv << header_array.unshift('#')
 			data_nested_array.each do |row|
@@ -95,6 +107,7 @@ module FilesHelper
 	end
 	def nuke_all_uploads
 		FileUtils.rm_rf(jquery_uploads_dir)
+		system("echo '' > ~/.local/share/recently-used.xbel \;") if PI
 	end	
   def clear_stale_uploads
     nuke_stale_uploads
@@ -104,12 +117,7 @@ module FilesHelper
   	nuke_all_uploads if PI
   end
 	def nuke_coldstorage_directory
-		FileUtils.rm_rf(Dir["#{coldstorage_directory}/**/*.csv*"])
-		# FileUtils.rm_rf(Dir["#{public_directory_path}*.csv*"])
-		# FileUtils.rm_rf(Dir["#{private_directory_path}*.csv*"])
-		# FileUtils.rm_rf(Dir["#{encrypted_directory_path}*.csv*"])
-		# FileUtils.rm_rf(Dir["#{unencrypted_directory_path}*.csv*"])
-		nuke_all_uploads
+		system("srm -r #{coldstorage_directory}*")
 	end
 
 	def clear_coldstorage_files(usb=false)	
