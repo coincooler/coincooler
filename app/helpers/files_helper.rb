@@ -106,8 +106,7 @@ module FilesHelper
 		path_array.each {|p| FileUtils.rm_rf(p)}
 	end
 	def nuke_all_uploads
-		FileUtils.rm_rf(jquery_uploads_dir)
-		system("echo '' > ~/.local/share/recently-used.xbel \;") if PI
+		FileUtils.rm_rf(jquery_uploads_dir)		
 	end	
   def clear_stale_uploads
     nuke_stale_uploads
@@ -117,7 +116,9 @@ module FilesHelper
   	nuke_all_uploads if PI
   end
 	def nuke_coldstorage_directory
-		system("srm -r #{coldstorage_directory}*")
+		# system("srm -r #{coldstorage_directory}*") too slow on the rp
+		FileUtils.rm_rf(Dir["#{coldstorage_directory}/**/*.csv*"])
+		nuke_all_uploads		
 	end
 
 	def clear_coldstorage_files(usb=false)	

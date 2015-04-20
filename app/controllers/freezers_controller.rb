@@ -74,8 +74,7 @@ class FreezersController < ApplicationController
 					FileUtils.mkdir_p File.dirname(target)
 			  	FileUtils.cp(origin,target)			  	
 			  	flash[:success] = {message: "Bitcoin addresses"+success_copy_suffix,title: success_copy_title(cold_storage_directory_name),id: 'addr_download_success'}
-			  when 'unencrypted_private_keys'	
-			  	
+			  when 'unencrypted_private_keys'			  	
 			  	origin = private_keys_file_path('csv',false)
 			  	target = unencrypted_directory_path(true)+private_keys_file_name+'.csv'
 			  	FileUtils.mkdir_p File.dirname(target)
