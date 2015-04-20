@@ -122,13 +122,15 @@ class UploadsController < ApplicationController
   def addresses
     @expose=params[:expose]   
     @title = addresses_title
+    @n=0
+    @remote = (AJAXON && COPY)
     @keys = $keys
   end
 
   def download
     begin
       if COPY
-        copy_uploaded_file
+        copy_uploaded_file(params[:download])
       else
         download_uploaded_file
       end
@@ -147,7 +149,7 @@ class UploadsController < ApplicationController
     def instructions_flash
       {message: "You can use the download buttons to download a private key #{'to your USB stick' if usb?}", hide: false,id: 'instruction',close: !COPY} 
     end
-    def copy_uploaded_file
+    def copy_uploaded_file(addr_or_key)
       if !dynamic_usb_mount
         cookies[:copy] = 'no_usb'
         flash[:danger] = {message: no_usb_message,title: 'Insert a USB drive',delay_seconds: FLASH_DELAY_SECONDS,id: 'no_usb'}
@@ -161,7 +163,12 @@ class UploadsController < ApplicationController
         FileUtils.cp(origin,target)
         flash[:success] = {message: "#{filename} "+success_copy_suffix,title: success_copy_title(cold_storage_directory_name),delay_seconds: FLASH_DELAY_SECONDS,id: "download_upload"}
       end
-      redirect_to old_inspect_keys_path
+      case addr_or_key
+      when 'keys'
+        redirect_to old_inspect_keys_path
+      when 'addresses'
+        redirect_to old_inspect_addresses_path
+      end      
     end
     def download_uploaded_file
       file = Upload.last
