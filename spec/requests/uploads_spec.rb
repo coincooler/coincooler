@@ -89,7 +89,7 @@ describe "Uploads:" do
 			page.should have_selector('td.text_pubkey#address_10', text: '1CXaVvECDcvBb8PFMJAsCPGhqkKwP1tD8K')
 			page.should_not have_selector('td.text_pubkey#address_11')
 		end
-		describe "download upload link should" do
+		describe "download upload link should", disabled: true do
 			describe "save the uploaded addresses file to the usb location" do
 				before do
 				  click_link download_upload_button
@@ -128,7 +128,7 @@ describe "Uploads:" do
 				end
 			end
 		end
-		describe "download upload link should" do
+		describe "download upload link should", disabled: true do
 			describe "save the uploaded keys file to the usb location" do
 				before do
 				  click_link download_upload_button
