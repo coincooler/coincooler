@@ -1,19 +1,6 @@
 module PathHelper
 	require 'open3'
 
-	def relative_root_path
-		File.expand_path(Rails.root) +'/'
-	end
-
-	def remove_params(path_with_params)
-		s=path_with_params.index('?').to_i
-		s>0 ? path_with_params[0..(s-1)] : path_with_params
-	end
-
-	def dieharder_scorecard
-		relative_root_path+'public/dieharder'
-	end
-
 	def cold_storage_directory_name
 		'Cold_Storage_'+Time.now.strftime("%Y-%m-%d#{$tag}/").to_s
 	end
@@ -27,10 +14,10 @@ module PathHelper
 		end
 	end
 
-	def usb_path(test_usb_num=1)
-		tmp=dynamic_usb_mount(test_usb_num)
-		if tmp
-			return '/media/usb'+tmp.to_s+'/'
+	def usb_path(test_usb_num = 1)
+		num = dynamic_usb_mount(test_usb_num)
+		if num
+			return "/media/usb#{num.to_s}/"
 		else
 			return '/dev/null/'
 		end
@@ -42,6 +29,19 @@ module PathHelper
 		else
 			return relative_root_path + 'files/'
 		end
+	end
+
+	def relative_root_path
+		File.expand_path(Rails.root) +'/'
+	end
+
+	def remove_params(path_with_params)
+		s=path_with_params.index('?').to_i
+		s>0 ? path_with_params[0..(s-1)] : path_with_params
+	end
+
+	def dieharder_scorecard
+		relative_root_path+'public/dieharder'
 	end
 
 	def jquery_uploads_dir
