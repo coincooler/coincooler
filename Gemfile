@@ -30,24 +30,12 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'annotate', ">=2.5.0"
-  gem 'konacha'
-  gem "poltergeist"
-  gem 'chai-jquery-rails'
 end
 
 group :test do
-  gem 'selenium-webdriver'
   gem 'capybara', '2.1.0'
   gem 'rb-fsevent', '0.9.3', :require => false
-  gem 'launchy', '2.2.0'
   gem 'factory_girl_rails', '4.2.0'
   gem 'cucumber-rails', '1.3.0', :require => false
   gem 'database_cleaner', '~> 1.0.0.RC1'
-end
-
-group :production do
-  gem 'pg', '0.15.1'
-  gem 'rails_12factor'
-  gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
-  gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
 end
