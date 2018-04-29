@@ -15,8 +15,9 @@ module PathHelper
 			.split("\n")
 			.map { |line| line.split(" on ") }
 			.max { |x, y| x.first <=> y.first }
+			
 		return "/dev/null/" unless mount
-		mount.last.split(" (").first + "/"
+		mount.last.split(/type|\(/).first.strip + "/"
 	end
 
 	def usb_attached?
