@@ -1,34 +1,48 @@
 module PathHelper
+	include ApplicationHelper
 	require 'open3'
 
 	def cold_storage_directory_name
 		'Cold_Storage_'+Time.now.strftime("%Y-%m-%d#{$tag}/").to_s
 	end
 
-	def dynamic_usb_mount(test_usb_num=1)
-		if Rails.env=='test'
-			return test_usb_num
-		else
-			regy=/(\/media\/usb)(\d+)(\s+type)/
-			return `mount;`.scan(regy).map{|x| p x[1].to_i}.max;
+	def media_dir
+		osx? ? "Volumes" : "media"
+	end
+
+	def usb_path
+		mount = `mount | grep -iE "#{media_dir}";`
+			.split("\n")
+			.map { |line| line.split(" on ") }
+			.max { |x, y| x.first <=> y.first }
+		return "/dev/null/" unless mount
+		mount.last.split(" (").first + "/"
+	end
+
+	def usb_attached?
+		begin
+			Open3.popen3(usb_path)
+			false
+		rescue => e
+			e.message.scan(/Permission denied/).present?
 		end
 	end
 
-	def usb_path(test_usb_num = 1)
-		num = dynamic_usb_mount(test_usb_num)
-		if num
-			return "/media/usb#{num.to_s}/"
-		else
-			return '/dev/null/'
-		end
-	end
+	def usb?
+  	COPY && usb_attached?
+  end
 
-	def coldstorage_directory(usb=false)
-		if usb
-			return usb_path + cold_storage_directory_name
-		else
-			return relative_root_path + 'files/'
-		end
+  def set_copy_cookie
+  	if usb_attached?
+  		cookies[:copy] = 'usb'
+  	else
+  		cookies[:copy] = 'no_usb'
+  	end
+  end
+
+	def coldstorage_directory(usb = false)
+		return usb_path + cold_storage_directory_name if usb
+		relative_root_path + 'files/'
 	end
 
 	def relative_root_path
@@ -36,8 +50,8 @@ module PathHelper
 	end
 
 	def remove_params(path_with_params)
-		s=path_with_params.index('?').to_i
-		s>0 ? path_with_params[0..(s-1)] : path_with_params
+		s = path_with_params.index('?').to_i
+		s > 0 ? path_with_params[0..(s-1)] : path_with_params
 	end
 
 	def dieharder_scorecard
@@ -125,34 +139,6 @@ module PathHelper
 		raise 'Share number must be positive' unless number > 0
 		encrypted_directory_path(usb)+password_share_file_name+'_'+number.to_s+suffix('csv')
 	end
-
-	def number_to_letter(number)
-		(number+96).chr if (1..26).include?(number)
-	end
-
-	def really_attached?(string)
-		string.match(/^fdisk: unable to open \/dev\/sd\w\d: Permission denied/).to_a.length > 0
-	end
-
-	def get_fdisk(dynamic_usb_mount)
-		Open3.popen3('fdisk /dev/sd'+number_to_letter(dynamic_usb_mount.to_i).to_s+'1') { |stdin, stdout, stderr, wait_thr| stderr.read }
-	end
-
-	def dynamic_usb_really_attached?(number)
-		really_attached?(get_fdisk(number).chomp)
-	end
-
-  def set_copy_cookie
-  	if dynamic_usb_really_attached?(dynamic_usb_mount)
-  		cookies[:copy] = 'usb'
-  	else
-  		cookies[:copy] = 'no_usb'
-  	end
-  end
-
-  def usb?
-  	COPY && dynamic_usb_really_attached?(dynamic_usb_mount)
-  end
 
   def set_tag
     if Rails.env=='test'

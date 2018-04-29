@@ -57,44 +57,13 @@ describe PathHelper do
 	end
 
 	describe "usb_path" do
-		it "should reside under the /media location" do
-			usb_path[0..('/media/'.length-1)].should == '/media/'
-		end
-		it { usb_path.should == '/media/usb1/' }
-		it { usb_path(2).should == '/media/usb2/' }
-		it { usb_path(nil).should == '/dev/null/' }
-		describe "dynamic usb" do
-			it "should be nil or an integer" do
-				dynamic_usb_mount.to_s.to_i.should be_integer
-				dynamic_usb_mount(2).should == 2
-				dynamic_usb_mount(nil).should be_nil
-			end
+		it "should reside under the media directory" do
+			usb_path[0..("/#{media_dir}/".length-1)].should == "/#{media_dir}/"
 		end
 	end
 
 	describe "remove params" do
 		it{ remove_params('localhost:3000/new_keys').should == 'localhost:3000/new_keys' }
 		it{ remove_params('localhost:3000/new_keys?expose=prvkey_qr_btn_1').should == 'localhost:3000/new_keys' }
-	end
-
-	describe "number to lower case letter" do
-		it { number_to_letter(1).should == 'a' }
-		it { number_to_letter(26).should == 'z' }
-		it { number_to_letter(2).should == 'b' }
-		it { number_to_letter(0).should be_nil }
-		it { number_to_letter(27).should be_nil }
-	end
-
-	describe "really attached?" do
-		it { really_attached?('fdisk: unable to open /dev/sde1: Permission denied').should be_true }
-		it { really_attached?('fdisk: unable to open /dev/sdd1: No such file or directory').should be_false }
-		it { really_attached?('fdisk: unable to open /dev/sd1: No such file or directory').should be_false }
-	end
-	
-	describe "dynamic_usb_really_attached?" do
-		it { dynamic_usb_really_attached?(nil).should be_false}
-		it { dynamic_usb_really_attached?(0).should be_false}
-		it { dynamic_usb_really_attached?(27).should be_false}
-		it { dynamic_usb_really_attached?(1).should be_true}
 	end
 end

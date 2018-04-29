@@ -7,17 +7,17 @@ class UploadsController < ApplicationController
   before_filter :clear_pk, only: [:inspect, :keys, :addresses]
   before_filter :clear_stale_uploads
   before_filter :nuke_all_uploads_on_rp, only: :index
-  
+
   def index
     @title=inspect_page_title
-    @uploads = Upload.all    
+    @uploads = Upload.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @uploads.map{|upload| upload.to_jq_upload } }
-    end    
+    end
   end
 
-  def inspect    
+  def inspect
     @title=inspect_page_title
     @shares = get_shares(Upload.all)
     @password = get_password(Upload.all) || params[:password]
@@ -28,11 +28,11 @@ class UploadsController < ApplicationController
       process_uploaded_file(@upload.upload,@password, @shares)
     else
       flash[:error]= {message: missing_file_error, delay_seconds: 5,id: 'missing_file'}
-      # redirect_to home_path      
+      # redirect_to home_path
       redirect_to uploads_path
-    end    
+    end
     # flash[:notice] = "Successfully created..."+@upload.upload_file_name.to_s if @upload
-    # render 'index'      
+    # render 'index'
   end
 
   # GET /uploads/1
@@ -74,7 +74,7 @@ class UploadsController < ApplicationController
           :content_type => 'text/html',
           :layout => false
         }
-        format.json { render json: {files: [@upload.to_jq_upload]}, status: :created, location: @upload }        
+        format.json { render json: {files: [@upload.to_jq_upload]}, status: :created, location: @upload }
       else
         format.html { render action: "new" }
         format.json { render json: @upload.errors, status: :unprocessable_entity }
@@ -120,7 +120,7 @@ class UploadsController < ApplicationController
   end
 
   def addresses
-    @expose=params[:expose]   
+    @expose=params[:expose]
     @title = addresses_title
     @n=0
     @remote = (AJAXON && COPY)
@@ -135,9 +135,9 @@ class UploadsController < ApplicationController
         download_uploaded_file
       end
     rescue => e
-      logger.warn(e.to_s) 
+      logger.warn(e.to_s)
       flash[:error]= {message: missing_file_error,delay_seconds: 5, id: 'missing_file'}
-      redirect_to home_path       
+      redirect_to home_path
     end
   end
 
@@ -147,10 +147,10 @@ class UploadsController < ApplicationController
       params.require(:upload).permit(:upload)
     end
     def instructions_flash
-      {message: "You can use the download buttons to download a private key #{'to your USB stick' if usb?}", hide: false,id: 'instruction',close: !COPY} 
+      {message: "You can use the download buttons to download a private key #{'to your USB stick' if usb?}", hide: false,id: 'instruction',close: !COPY}
     end
     def copy_uploaded_file(addr_or_key)
-      if !dynamic_usb_mount
+      unless usb_attached?
         cookies[:copy] = 'no_usb'
         flash[:danger] = {message: no_usb_message,title: 'Insert a USB drive',delay_seconds: FLASH_DELAY_SECONDS,id: 'no_usb'}
       else
@@ -168,12 +168,12 @@ class UploadsController < ApplicationController
         redirect_to old_inspect_keys_path
       when 'addresses'
         redirect_to old_inspect_addresses_path
-      end      
+      end
     end
     def download_uploaded_file
       file = Upload.last
       filepath = file.upload.path
-      filename = file.upload_file_name      
+      filename = file.upload_file_name
       send_file filepath, filename: filename
-    end    
+    end
 end
