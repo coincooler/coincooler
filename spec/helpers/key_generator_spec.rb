@@ -29,6 +29,4 @@ describe "key generator" do
 	describe "each entry is a bitcoin key object" do
 		specify {keygen.keys[0].class.should == Bitcoin::Key }
 	end
-
-
 end

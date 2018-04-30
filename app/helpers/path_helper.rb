@@ -2,10 +2,6 @@ module PathHelper
 	include ApplicationHelper
 	require 'open3'
 
-	def cold_storage_directory_name
-		'Cold_Storage_'+Time.now.strftime("%Y-%m-%d#{$tag}/").to_s
-	end
-
 	def media_dir
 		osx? ? "Volumes" : "media"
 	end
@@ -15,7 +11,7 @@ module PathHelper
 			.split("\n")
 			.map { |line| line.split(" on ") }
 			.max { |x, y| x.first <=> y.first }
-			
+
 		return "/dev/null/" unless mount
 		mount.last.split(/type|\(/).first.strip + "/"
 	end
@@ -41,8 +37,20 @@ module PathHelper
   	end
   end
 
+	def cold_storage_directory_prefix
+		"Cold_Storage"
+	end
+
+	def cold_storage_directory_timestamp
+		Time.now.strftime("%Y-%m-%d#{$tag}/").to_s
+	end
+
+	def cold_storage_directory_name
+		"#{cold_storage_directory_prefix}_#{cold_storage_directory_timestamp}"
+	end
+
 	def coldstorage_directory(usb = false)
-		return usb_path + cold_storage_directory_name if usb
+		return File.join(usb_path, cold_storage_directory_name) if usb
 		relative_root_path + 'files/'
 	end
 
@@ -149,7 +157,7 @@ module PathHelper
     else
       tag='_'
     end
-    $tag=tag+rand(100000..999999).to_s
+    $tag = tag + rand(100000..999999).to_s
   end
 
   def short_efs
