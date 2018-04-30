@@ -5,6 +5,7 @@ module TempFixForRakeLastComment
     last_description
   end
 end
+
 Rake::Application.send :include, TempFixForRakeLastComment
 
 require File.expand_path('../config/application', __FILE__)
