@@ -15,7 +15,7 @@ describe "key generator" do
 	end
 
 	describe "empty initializer" do
-	 	it {expect {KeyGenerator.new }.to raise_error(ArgumentError,'wrong number of arguments (0 for 1)')}
+	 	it {expect {KeyGenerator.new }.to raise_error(ArgumentError,/wrong number of arguments/)}
 	end
 
 	describe "must be initialized with a positive integer" do
@@ -24,8 +24,8 @@ describe "key generator" do
 		it {expect {KeyGenerator.new('foo') }.to raise_error('must initialize with a positive integer')}
 		it {expect {KeyGenerator.new('') }.to raise_error('must initialize with a positive integer')}
 		it {expect {KeyGenerator.new(nil) }.to raise_error('must initialize with a positive integer')}
-	end	
-	
+	end
+
 	describe "each entry is a bitcoin key object" do
 		specify {keygen.keys[0].class.should == Bitcoin::Key }
 	end

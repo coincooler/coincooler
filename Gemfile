@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.10'
+ruby '2.3.0'
 
 gem 'rails', '4.2'
 gem 'bootstrap-sass', '2.3.0.1'
@@ -23,7 +23,7 @@ gem 'twitter-bootstrap-rails'
 gem 'ffi'
 
 group :development, :test do
-  gem 'rspec-rails', '2.13.1'
+  gem 'rspec-rails', '2.14.1'
   gem 'rb-readline', "~> 0.5.0"
   gem 'childprocess', '0.3.6'
   gem 'pry-rails'
