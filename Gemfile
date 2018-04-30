@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.1.0'
+ruby '2.2.10'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.0.6'
 gem 'bootstrap-sass', '2.3.0.1'
 gem 'bcrypt-ruby', '3.0.0'
 gem 'faker', '1.1.2'
@@ -38,4 +38,5 @@ group :test do
   gem 'factory_girl_rails', '4.2.0'
   gem 'cucumber-rails', '1.3.0', :require => false
   gem 'database_cleaner', '~> 1.0.0.RC1'
+  gem 'test-unit'
 end
