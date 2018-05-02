@@ -1,26 +1,19 @@
 class KeyGenerator
-	
 	require 'bitcoin'
-
 	attr_reader :keys, :howmany
 
 	def initialize(num)
-		if num.class==Fixnum && num>0
-			@howmany=num	
+		if num.class == Integer && num.positive?
+			@howmany = num
 		else
 			raise 'must initialize with a positive integer'
-		end		
-		@keys=generate_keys_array(@howmany)
+		end
+		@keys = generate_keys_array(@howmany)
 	end
 
 	private
 
 	def generate_keys_array(num)
-		result=[]
-		num.times do |entry|
-			result << Bitcoin::Key.generate
-		end
-		result
+		num.times.each_with_object([]) { |n, result| result << Bitcoin::Key.generate }
 	end
-
 end

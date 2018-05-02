@@ -3,7 +3,8 @@ KEYS_LIMIT = 100
 SHARES_LIMIT = 9
 DEFAULT_SSSN = 5
 DEFAULT_SSSK = 3
-PI = `cat /etc/rpi-issue` =~ /Raspberry Pi/ || `cat /etc/os-release` =~ /Raspbian/
+PI = ApplicationHelper::pi?
+OSX = ApplicationHelper::osx?
 DEV = Rails.env.development?
 PROD = Rails.env.production?
 TEST = Rails.env.test?

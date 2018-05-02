@@ -3,7 +3,7 @@ module PathHelper
 	require 'open3'
 
 	def media_dir
-		osx? ? "Volumes" : "media"
+		OSX ? "Volumes" : "media"
 	end
 
 	def usb_path
