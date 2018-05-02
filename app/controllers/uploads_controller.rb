@@ -5,7 +5,7 @@ class UploadsController < ApplicationController
   include InspectorsHelper
   include UploadHelper
   before_filter :clear_pk, only: [:inspect, :keys, :addresses]
-  before_filter :clear_stale_uploads
+  before_filter :clear_stale_uploads, only: :index
   before_filter :nuke_all_uploads_on_rp, only: :index
 
   def index

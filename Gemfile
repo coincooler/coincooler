@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.5.1'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.2.10'
 gem 'bootstrap-sass', '2.3.0.1'
 gem 'bcrypt-ruby', '3.0.0'
 gem 'faker', '1.1.2'
@@ -23,7 +23,7 @@ gem 'twitter-bootstrap-rails'
 gem 'ffi'
 
 group :development, :test do
-  gem 'rspec-rails', '2.13.1'
+  gem 'rspec-rails', '2.14.1'
   gem 'rb-readline', "~> 0.5.0"
   gem 'childprocess', '0.3.6'
   gem 'pry-rails'
@@ -38,4 +38,5 @@ group :test do
   gem 'factory_girl_rails', '4.2.0'
   gem 'cucumber-rails', '1.3.0', :require => false
   gem 'database_cleaner', '~> 1.0.0.RC1'
+  gem 'test-unit'
 end

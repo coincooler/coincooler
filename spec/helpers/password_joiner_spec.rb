@@ -8,7 +8,7 @@ describe "password joiner" do
 	subject { joiner }
 	describe "attributes" do
 		it { should respond_to :password }
-		its(:password) { should==pass }		
+		its(:password) { should==pass }
 	end
 	describe "init with string" do
 		it "should raise an error" do
@@ -17,9 +17,9 @@ describe "password joiner" do
 	end
 	describe "empty init" do
 		it "should raise an error" do
-			expect{PasswordJoiner.new}.to raise_error(ArgumentError, 'wrong number of arguments (0 for 1)')
+			expect{PasswordJoiner.new}.to raise_error(ArgumentError, /wrong number of arguments/)
 		end
-	end	
+	end
 	describe "init with number" do
 		it "should raise an error" do
 			expect{PasswordJoiner.new(1)}.to raise_error(RuntimeError)
@@ -30,15 +30,15 @@ describe "password joiner" do
 		it { PasswordJoiner.new([1]).password.should be_nil}
 		it { PasswordJoiner.new([1,2,3]).password.should be_nil}
 	end
-	it "Joiner should be able to retrieve pass out of any valid combo" do			
+	it "Joiner should be able to retrieve pass out of any valid combo" do
 		splitter.shares.combination(3).each do |combo|
 			PasswordJoiner.new(combo).password.should == pass
-		end			
-	end	
-	it "Joiner should not be able to retrieve from just 2 shares" do			
+		end
+	end
+	it "Joiner should not be able to retrieve from just 2 shares" do
 		splitter.shares.combination(2).each do |combo|
 			PasswordJoiner.new(combo).password.should be_nil
-		end			
+		end
 	end
 	describe "explicit example of 3 out of 4 shares for 'foo'" do
 		let!(:shares_array) { ['3ucnj8eZdNxfSw','C43U2payWYru9F','A9GMe4Dqx4T465','62A4qounESkhdc'] }
@@ -50,13 +50,13 @@ describe "password joiner" do
 		end
 		it "should work with more than 3 valid shares" do
 			PasswordJoiner.new(shares_array.drop(1)).password.should == 'foo'
-		end		
+		end
 		it "should not work with an array containing 3 valid shares and other crap" do
 			PasswordJoiner.new(shares_array.drop(1)<<'foobar').password.should be_nil
-		end	
+		end
 		it "should not work with an array containing 2 valid and one invalid shares" do
 			PasswordJoiner.new(shares_array.drop(2)<<'foobar').password.should be_nil
-		end							
+		end
 	end
 
 	describe "joiner should retrieve splitter random password" do

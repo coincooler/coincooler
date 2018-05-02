@@ -1,8 +1,8 @@
 module FilesHelper
 	require 'csv'
-	require 'bitcoin'  
+	require 'bitcoin'
 	include PathHelper
-	
+
 	def save_file(path, data)
 		path = File.expand_path path
 		dirpath = File.dirname(path)
@@ -13,7 +13,7 @@ module FilesHelper
 
 	def delete_file(path)
 		File.delete(path) if File.exist?(path)
-	end	
+	end
 
 	def file_there?(path)
 		File.exist?(path)
@@ -22,14 +22,14 @@ module FilesHelper
 	def read_address_csv(path)
 		CSV.read(path,headers: true,col_sep: "\t").map do |row|
 			[row[0],row[1]]
-		end		
+		end
 	end
 
 	def save_csv(path,header_array,data_nested_array)
 		path = File.expand_path path
 		dirpath = File.dirname(path)
   	FileUtils.mkdir_p dirpath
-  	FileUtils.chmod 'a+w', dirpath		
+  	FileUtils.chmod 'a+w', dirpath
 		CSV.open(path,"wb",col_sep: ",") do |csv|
 			csv << header_array
 			data_nested_array.each do |row|
@@ -41,7 +41,7 @@ module FilesHelper
 		path = File.expand_path path
 		dirpath = File.dirname(path)
   	FileUtils.mkdir_p dirpath
-  	FileUtils.chmod 'a+w', dirpath		
+  	FileUtils.chmod 'a+w', dirpath
 		CSV.open(path,"wb",col_sep: ",") do |csv|
 			csv << header_array.unshift('#')
 			data_nested_array.each do |row|
@@ -86,15 +86,15 @@ module FilesHelper
 		return false if csv_data[0][0]!="Password"
 		return false if csv_data[1][0].blank?
 		true
-	end	
+	end
 
   def save_csv_for_row(number,path)
     header=['Bitcoin Address','Private Key']
     data=[[]]
     data[0] << $keys[number-1][:addr]
-    data[0] << $keys[number-1][:private_wif]      
+    data[0] << $keys[number-1][:private_wif]
     save_enum_csv(path,header,data, number)
-  end 
+  end
 
 	def get_stale_uploads_array
 		stale_array=Dir.glob(jquery_uploads_dir+"/**/").map{|p| p.gsub!('//','/')}
@@ -106,8 +106,8 @@ module FilesHelper
 		path_array.each {|p| FileUtils.rm_rf(p)}
 	end
 	def nuke_all_uploads
-		FileUtils.rm_rf(jquery_uploads_dir)		
-	end	
+		FileUtils.rm_rf(jquery_uploads_dir)
+	end
   def clear_stale_uploads
     nuke_stale_uploads
     Upload.all.each {|u| u.destroy unless file_there?(u.upload.path)} if Upload.count>0
@@ -117,11 +117,11 @@ module FilesHelper
   end
 	def nuke_coldstorage_directory
 		# system("srm -r #{coldstorage_directory}*") too slow on the rp
-		FileUtils.rm_rf(Dir["#{coldstorage_directory}/**/*.csv*"])
-		nuke_all_uploads		
+		FileUtils.rm_rf(Dir["#{usb_path}#{cold_storage_directory_prefix}*"])
+		nuke_all_uploads
 	end
 
-	def clear_coldstorage_files(usb=false)	
+	def clear_coldstorage_files(usb=false)
 		delete_file(public_addresses_file_path('csv',usb))
 		delete_file(private_keys_file_path('csv',false,usb))
 		delete_file(private_keys_file_path('csv',true,usb))

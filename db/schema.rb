@@ -13,9 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140615085200) do
 
-  create_table "uploads", force: true do |t|
-    t.string   "upload_file_name"
-    t.string   "upload_content_type"
+  create_table "uploads", force: :cascade do |t|
+    t.string   "upload_file_name",    limit: 255
+    t.string   "upload_content_type", limit: 255
     t.integer  "upload_file_size"
     t.datetime "upload_updated_at"
     t.datetime "created_at"
