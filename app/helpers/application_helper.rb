@@ -4,12 +4,7 @@ module ApplicationHelper
   end
 
   def self.pi?
-    begin
-      system("cat /etc/rpi-issue", err: File::NULL) =~ /Raspberry Pi/ ||
-      system("cat /etc/os-release", err: File::NULL) =~ /Raspbian/ ? true : false
-    rescue => e
-      Rails.logger.debug "got #{e.message} when tried to check if PI"
-      false
-    end
+    return false if osx?
+    `cat /etc/rpi-issue` =~ /Raspberry Pi/ || `cat /etc/os-release` =~ /Raspbian/
   end
 end
