@@ -5,6 +5,7 @@ module ApplicationHelper
 
   def self.pi?
     return false if osx?
-    `cat /etc/rpi-issue` =~ /Raspberry Pi/ || `cat /etc/os-release` =~ /Raspbian/
+    test = `cat /etc/rpi-issue` =~ /Raspberry Pi/ || `cat /etc/os-release` =~ /Raspbian/
+    !test&.negative?
   end
 end
