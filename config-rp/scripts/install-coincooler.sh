@@ -9,8 +9,8 @@
 sudo sed -i 's/raspberrypi/coincooler/g' /etc/hostname
 sudo sed -i 's/raspberrypi/coincooler/g' /etc/hosts
 
-# install nodejs js runtime and sqlite
-sudo apt install nodejs libsqlite3-dev
+# install nodejs js runtime, sqlite and srm
+sudo apt install nodejs libsqlite3-dev secure-delete
 
 # fix issue with openssl support a-la https://github.com/oleganza/btcruby/issues/29
 sudo ln -nfs /usr/lib/arm-linux-gnueabihf/libssl.so.1.0.2 /usr/lib/arm-linux-gnueabihf/libssl.so
@@ -42,5 +42,15 @@ bundle exec rspec spec
 sudo cp ~/coincooler/config-rp/scripts/.aliases ~/.aliases
 sudo cp ~/coincooler/config-rp/launchers/CoinCooler ~/Desktop
 sudo cp ~/coincooler/config-rp/launchers/coincooler.desktop /usr/share/raspi-ui-overrides/applications
-echo "source .aliases" >> ~/.bashrc
-echo "coincooler" >> ~/.bashrc
+
+# quicklaunch hack
+read -d '' String <<"EOF"
+# coincooler
+source .aliases
+if [ ! -f /home/pi/coincooler/tmp/pids/server.pid ]; then
+    coincooler
+fi
+EOF
+
+# Save to ~/.bashrc
+echo -e "\n${String}" >> ~/.bashrc
