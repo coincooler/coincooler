@@ -4,23 +4,13 @@
 # Installs Ruby 2.5 using rbenv/ruby-build on the Raspberry Pi (Raspbian)
 # --------------------------------------------------------------------------------------------
 
-# Welcome message
-echo -e "This will install Ruby 2.5 using rbenv/ruby-build.\n"
-
-# Prompt to continue
-read -p "  Continue? (y/n) " ans
-if [[ $ans != "y" ]]; then
-  echo -e "\nQuitting...\n"
-  exit
-fi
-echo
-
 # Time the install process
 START_TIME=$SECONDS
 
 # Install git + dependencies
 # See: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
 sudo apt update
+sudo apt upgrade
 sudo apt install -y git autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
 
 # Check out rbenv into ~/.rbenv
