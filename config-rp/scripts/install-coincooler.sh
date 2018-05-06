@@ -39,8 +39,8 @@ bundle exec rake assets:precompile
 bundle exec rspec spec
 
 # copy over config files
-sudo cp ~/coincooler/config-rp/scripts/.aliases /home/pi/
-sudo cp ~/coincooler/config-rp/launchers/CoinCooler /home/pi/Desktop
+sudo cp ~/coincooler/config-rp/scripts/.aliases ~/.aliases
+sudo cp ~/coincooler/config-rp/launchers/CoinCooler ~/Desktop
 sudo cp ~/coincooler/config-rp/launchers/coincooler.desktop /usr/share/raspi-ui-overrides/applications
-echo "source .aliases" >> .bashrc
-echo "coincooler" >> .bashrc
+echo "source .aliases" >> ~/.bashrc
+echo "coincooler" >> ~/.bashrc
