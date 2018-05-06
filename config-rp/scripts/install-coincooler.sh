@@ -23,7 +23,7 @@ bundle config github.https true
 bundle config disable_shared_gems true
 
 # clone the coincooler repo and bundle
-git clone https://github.com/coincooler/coincooler.git
+git clone https://github.com/assafshomer/rpcc.git
 cd coincooler
 bundle
 
