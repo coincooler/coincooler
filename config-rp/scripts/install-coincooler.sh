@@ -54,3 +54,9 @@ EOF
 
 # Save to ~/.bashrc
 echo -e "\n${String}" >> ~/.bashrc
+
+#add purge script to crontab
+crontab -l > mycron
+echo "@reboot /home/pi/coincooler/config-rp/scripts/purger.sh" >> mycron
+sudo crontab mycron
+rm mycron
